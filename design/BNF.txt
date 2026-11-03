@@ -1,0 +1,59 @@
+<lolcode>           ::= #HAI <comments> <head> <variable_define> <body> #KBYE
+
+<comments>          ::= <comment> <comments>
+                      | ε
+<comment>           ::= #OBTW <text> #TLDR
+
+<head>              ::= #MAEK HEAD <comments> <title> #MKAY <comments>
+                      | ε
+<title>             ::= #GIMMEH TITLE <text> #OIC <comments>
+
+<body>              ::= <body_element> <comments> <body>
+                      | ε
+<body_element>      ::= <paragraph>
+                      | <bold>
+                      | <list>
+                      | <link>
+                      | <newline>
+                      | <variable_use>
+                      | WORD
+
+<paragraph>         ::= #MAEK PARAGRAF <comments> <variable_define> <inner_paragraph> #MKAY
+<inner_paragraph>   ::= <paragraph_element> <comments> <inner_paragraph>
+                      | ε
+
+<paragraph_element> ::= <bold>
+                      | <list>
+                      | <link>
+                      | <newline>
+                      | <variable_use>
+                      | WORD
+
+<bold>              ::= #GIMMEH BOLD <variable_define> <inner_text> #OIC
+<inner_text>        ::= <variable_use> <inner_text>
+                      | WORD <inner_text>
+                      | ε
+
+<list>              ::= #MAEK LIST <variable_define> <list_items> #MKAY
+<list_items>        ::= <list_item> <comments> <more_list_items>
+<more_list_items>   ::= <list_items>
+                      | ε
+
+<list_item>         ::= #GIMMEH ITEM <variable_define> <inner_list> #OIC
+<inner_list>        ::= <bold> <inner_list>
+                      | <variable_use> <inner_list>
+                      | WORD <inner_list>
+                      | ε
+
+
+<link>              ::= #GIMMEH LINX WORD #OIC
+<newline>           ::= #NEWLINE
+
+<variable_define>   ::= #IHAZ WORD #ITIZ <text> #MKAY <comments> <variable_define>
+                      | ε
+
+<variable_use>      ::= #GIMMEH VAR WORD #OIC
+
+<text>              ::= WORD <text_tail>
+<text_tail>         ::= WORD <text_tail>
+                      | ε
